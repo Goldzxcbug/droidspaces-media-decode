@@ -15,7 +15,7 @@
 #include <sys/stat.h>
 #include <linux/dma-buf.h>
 #include <linux/videodev2.h>
-#include <drm/drm.h>
+#include <drm.h>
 #include <drm_fourcc.h>
 #include <stdint.h>
 #include <stdio.h>

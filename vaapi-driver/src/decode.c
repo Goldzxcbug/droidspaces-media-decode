@@ -31,7 +31,7 @@
 
 /* surface 分配在 msm_drm 的 dumb buffer 里，为的是能导出 dmabuf
  * （Firefox 取帧的唯一途径，见 export.c）。 */
-#include <drm/drm.h>
+#include <drm.h>
 
 #include "driver.h"
 #include "av1_bitstream.h"

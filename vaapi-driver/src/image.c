@@ -29,7 +29,7 @@
 #include <sys/stat.h>
 #include <limits.h>
 #include <unistd.h>
-#include <drm/drm.h>
+#include <drm.h>
 #include <drm_fourcc.h>
 
 #include "driver.h"
