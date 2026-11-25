@@ -28,6 +28,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Bookworm's libva headers predate vaMapBuffer2. Pin newer headers while
+      # keeping the compiler and glibc from Bookworm.
+      - name: Check out libva 2.24.0 headers
+        uses: actions/checkout@v4
+        with:
+          repository: intel/libva
+          ref: add80723247b8031fb8de14d8f599923d3759242
+          path: .ci-libva
+          persist-credentials: false
+
       - name: Enable aarch64 emulation
         uses: docker/setup-qemu-action@v3
         with:
@@ -43,10 +53,13 @@ jobs:
             debian:bookworm-slim bash -euxc '
               apt-get update -qq
               apt-get install -y --no-install-recommends \
-                build-essential git pkg-config libva-dev libdrm-dev
+                build-essential git libdrm-dev meson pkg-config
               git config --global --add safe.directory /src
+              meson setup /tmp/libva-build /src/.ci-libva \
+                -Dwith_x11=no -Dwith_glx=no -Dwith_wayland=no
               make clean
-              make HEVC10=1 AV1=0 all check tests
+              make HEVC10=1 AV1=0 VA_CFLAGS="-I/tmp/libva-build -I/src/.ci-libva" \
+                all check tests
             '
 
       - name: Verify it is an aarch64 shared object
@@ -132,7 +145,7 @@ jobs:
             echo
             echo '| 产物 | 工具链 |'
             echo '|---|---|'
-            echo "| \`msm_drm_drv_video.so\` | Debian bookworm aarch64，系统 GCC，GLIBC 2.36 |"
+            echo "| \`msm_drm_drv_video.so\` | Debian bookworm aarch64，系统 GCC，GLIBC 2.36，libva 2.24.0 头文件 |"
             echo
             echo '> 换工具链会改变二进制的 checksum，即使源码一字未动。要判断是否真有'
             echo '> 代码改动，看上面的「改动范围」而不是 checksum。'
