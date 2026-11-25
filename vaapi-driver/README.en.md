@@ -727,7 +727,7 @@ works:
 
 ```bash
 git -c http.proxy=socks5h://127.0.0.1:1080 clone \
-    https://github.com/Re-s/droidspaces-media-decode.git
+    https://github.com/Goldzxcbug/droidspaces-media-decode.git
 ```
 
 Note `socks5h` (letting the proxy do DNS) rather than `socks5`, and that this port does

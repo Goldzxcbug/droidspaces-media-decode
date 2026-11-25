@@ -316,7 +316,7 @@ done
 
 仓库里也有等价脚本，多了 `--verify` / `--uninstall` 和冲突检测：
 `tools/configure-chrome-vaapi.sh`、`tools/configure-firefox-vaapi.sh`、
-`tools/check-browser-vaapi.sh`（也附在 [Release](../../releases/latest) 里）。
+[`tools/check-browser-vaapi.sh`](tools/check-browser-vaapi.sh)。
 
 Firefox 脚本会自动找 profile，覆盖 `~/.mozilla/firefox`、
 `~/.config/mozilla/firefox`（较新版本遵循 XDG 后的位置）、snap 与 flatpak

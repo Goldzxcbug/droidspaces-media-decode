@@ -636,7 +636,7 @@ libva 会报 `has no function __vaDriverInit_1_0`。
 
 ```bash
 git -c http.proxy=socks5h://127.0.0.1:1080 clone \
-    https://github.com/Re-s/droidspaces-media-decode.git
+    https://github.com/Goldzxcbug/droidspaces-media-decode.git
 ```
 
 注意 `socks5h`（让代理做 DNS）而不是 `socks5`，且该端口不吃 `http://` 协议前缀。

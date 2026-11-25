@@ -43,11 +43,10 @@ jobs:
             debian:bookworm-slim bash -euxc '
               apt-get update -qq
               apt-get install -y --no-install-recommends \
-                build-essential pkg-config libva-dev libdrm-dev
+                build-essential git pkg-config libva-dev libdrm-dev
+              git config --global --add safe.directory /src
               make clean
-              make all HEVC10=1
-              make check
-              make tests
+              make HEVC10=1 AV1=0 all check tests
             '
 
       - name: Verify it is an aarch64 shared object
@@ -133,7 +132,7 @@ jobs:
             echo
             echo '| 产物 | 工具链 |'
             echo '|---|---|'
-            echo "| \`msm_drm_drv_video.so\` | Debian trixie aarch64，系统 gcc |"
+            echo "| \`msm_drm_drv_video.so\` | Debian bookworm aarch64，系统 GCC，GLIBC 2.36 |"
             echo
             echo '> 换工具链会改变二进制的 checksum，即使源码一字未动。要判断是否真有'
             echo '> 代码改动，看上面的「改动范围」而不是 checksum。'

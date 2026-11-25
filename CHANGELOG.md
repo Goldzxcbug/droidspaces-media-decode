@@ -1,6 +1,10 @@
 # 更新日志
 
-## v0.5.0-dev
+## v0.5.1
+
+- 发布 ARM64 驱动及 `SHA256SUMS` 到 `Goldzxcbug/droidspaces-media-decode`。
+- 使用 Debian 12 (Bookworm) 的 GLIBC 2.36 构建，避免依赖 `GLIBC_2.38` 的符号。
+- 发布构建启用 HEVC Main10 的 NV12/P010 硬解，AV1 默认关闭。编码仍使用 8 位 NV12。
 
 - 2026-11-15：新增独立 `make HEVC10=1` Main10 解码开关，源码默认仍不声明，不同时开启
   AV1/VP9 Profile2，也不增加 10 位编码。Main10 真正接受 8 位 NV12 和 10 位 P010：

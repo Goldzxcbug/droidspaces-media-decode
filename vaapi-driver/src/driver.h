@@ -58,7 +58,7 @@ struct dmd_encode;
  * 帧号记账以适配消费者的 surface 复用。真流（B 站 1080p60，1800 帧）与软解
  * 逐字节一致，吞吐 120~190fps。另按固件能力运行时门控 VP8/MPEG-2（本机不支持，
  * 此前虚报 profile）。详见 CHANGELOG。 */
-#define DMD_DRIVER_VERSION "0.5.0-dev"
+#define DMD_DRIVER_VERSION "0.5.1"
 /* Makefile 每次构建注入：git 短 hash，工作区有未提交改动时带 -dirty。
  * 例：0.4.3+60534cf2 / 0.4.3+60534cf2-dirty。这样 vainfo 能明确报告
  * Firefox 实际 dlopen 的是哪一版 .so，排查浏览器问题不再靠文件时间猜。 */
