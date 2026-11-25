@@ -33,18 +33,19 @@ jobs:
         with:
           platforms: arm64
 
-      # Debian trixie matches the container this driver actually runs in, so the
-      # libva and libdrm headers here are the ones it will be loaded against.
-      - name: Build in aarch64 Debian trixie
+      # Build in Debian bookworm (GLIBC 2.36) so the resulting msm_drm_drv_video.so
+      # avoids GLIBC_2.38+ symbol redirects (e.g. __isoc23_strtol) and stays forward-
+      # compatible across Debian 12 (fnOS), Debian 13, Ubuntu 24+, Fedora, and Arch.
+      - name: Build in aarch64 Debian bookworm
         run: |
           docker run --rm --platform linux/arm64 \
             -v "$PWD:/src" -w /src/vaapi-driver \
-            debian:trixie-slim bash -euxc '
+            debian:bookworm-slim bash -euxc '
               apt-get update -qq
               apt-get install -y --no-install-recommends \
                 build-essential pkg-config libva-dev libdrm-dev
               make clean
-              make all
+              make all HEVC10=1
               make check
               make tests
             '
